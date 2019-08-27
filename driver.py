@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     # Load model.
     print('Loading sepsis model...')
-    model = load_sepsis_model()
+    ssvm, cols, Dmean, Dstd = load_sepsis_model()
 
     # Iterate over files.
     print('Predicting sepsis labels...')
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         labels = np.zeros(num_rows)
         for t in range(num_rows):
             current_data = data[:t+1]
-            current_score, current_label = get_sepsis_score(current_data, model)
+            current_score, current_label = get_sepsis_score(current_data, ssvm, cols, Dmean, Dstd)
             scores[t] = current_score
             labels[t] = current_label
 
